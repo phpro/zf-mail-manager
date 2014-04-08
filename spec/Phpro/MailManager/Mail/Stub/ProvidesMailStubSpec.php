@@ -11,7 +11,7 @@ trait ProvidesMailStubSpec
     /**
      * @return \Phpro\MailManager\Mail\MailInterface
      */
-    protected  function getMailStub()
+    protected function getMailStub()
     {
         $prophet = new Prophet();
 

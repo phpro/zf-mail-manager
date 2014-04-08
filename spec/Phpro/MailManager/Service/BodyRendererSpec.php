@@ -34,7 +34,7 @@ class BodyRendererSpec extends ObjectBehavior
         $parsedBody = '<body></body>';
 
         // Body Rendering
-        $viewRenderer->render(Argument::that(function ($viewModel)  use ($mail) {
+        $viewRenderer->render(Argument::that(function ($viewModel) use ($mail) {
             return $viewModel->getTemplate() === $mail->getViewFile()
                 && $viewModel->terminate() === true
                 && $viewModel->getVariables()['param1'] == $mail->getParams()['param1'];
