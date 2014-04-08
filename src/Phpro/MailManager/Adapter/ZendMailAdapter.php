@@ -84,7 +84,6 @@ class ZendMailAdapter
         $body = $this->bodyRenderer->render($mail);
         $bodyPart = new Mime\Part($body);
         $bodyPart->type = Mime\Mime::TYPE_HTML;
-        $bodyPart->encoding = 'UTF-8';
 
         return $bodyPart;
     }

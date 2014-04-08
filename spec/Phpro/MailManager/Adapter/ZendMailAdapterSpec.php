@@ -38,7 +38,6 @@ class ZendMailAdapterSpec extends ObjectBehavior
 
             return $parts[0]->getRawContent() == $content
                 && $parts[0]->type == 'text/html'
-                && $parts[0]->encoding == 'UTF-8'
                 && $parts[1]->getRawContent() == '/tmp/file.txt'
                 && $parts[1]->id == 'name'
                 && $parts[1]->filename == 'name'
