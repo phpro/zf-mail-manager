@@ -1,0 +1,38 @@
+{
+  "name": "phpro/zf-mail-manager",
+  "description": "An easy-to-use mailmanager for ZF2 that lets you focus on creating your mails.",
+  "keywords": [
+    "mail",
+    "zend",
+    "zf2",
+    "mailmanager",
+    "module"
+  ],
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Toon Verwerft",
+      "email": "toon.verwerft@phpro.be"
+    }
+  ],
+  "require": {
+    "slm/mail": "~1.4.0",
+    "zendframework/zend-mail": "2.*",
+    "zendframework/zend-mime": "2.*",
+    "zendframework/zend-modulemanager": "2.*",
+    "zendframework/zend-servicemanager": "2.*",
+    "zendframework/zend-view": "2.*"
+  },
+  "require-dev": {
+    "phpspec/phpspec": "dev-master",
+    "fabpot/PHP-CS-Fixer": "*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Phpro\\MailManager": "src/"
+    },
+    "psr-4": {
+      "spec\\Phpro\\MailManager\\": "spec/Phpro/MailManager/"
+    }
+  }
+}
