@@ -9,11 +9,12 @@ class MailManagerSpec extends ObjectBehavior
 {
 
     /**
+     * @param \Phpro\MailManager\Service\MailPluginManager $pluginManager
      * @param \Phpro\MailManager\Adapter\AdapterInterface $adapter
      */
-    public function let($adapter)
+    public function let($pluginManager, $adapter)
     {
-        $this->beConstructedWith($adapter);
+        $this->beConstructedWith($pluginManager, $adapter);
     }
 
     public function it_is_initializable()

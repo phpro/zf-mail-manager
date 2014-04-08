@@ -13,6 +13,12 @@ return [
         ],
     ],
 
+    'mail_manager' => [
+        'invokables' => [
+            'DefaultMail' => 'Phpro\MailManager\Mail\DefaultMail',
+        ],
+    ],
+
     'view_manager' => [
         'template_map' => [
             'mails/layout' => __DIR__ . '/../view/mails/layout.phtml',

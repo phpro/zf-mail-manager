@@ -30,17 +30,33 @@ return array(
 ### Add your custom mail settings
 ```php
 return array(
+    //
+    // Default Mailmanager settings:
+    //
     'service_manager' => array(
         'aliases' => array(
             'Phpro\MailManager\DefaultAdapter' => 'Phpro\MailManager\Adapter\ZendMailAdapter',
         )
     ),
+
+    //
+    // Paths to e-mail templates
+    //
     'view_manager' => [
         'template_map' => [
             'mails/layout' => __DIR__ . '/../view/mails/layout.phtml',
             'mails/customer/registered' => __DIR__ . '/../view/mails/customer/registered.phtml',
         ],
-    ]
+    ],
+
+    //
+    // Custom e-mail plugin manager
+    //
+    'mail_manager' => [
+        'invokables' => [
+            'CustomerRegisteredMail' => 'CustomerRegisteredMail',
+        ],
+    ],
 );
 ```
 
@@ -72,8 +88,14 @@ class CustomerRegisteredMail extends DefaultMail
 
 ### Sending your e-mail:
 ```php
-$mail = new CustomerRegisteredMail();
+// Through the mail plugin manager:
 $mailManager = $serviceManager->get('Phpro\MailManager');
+$mail = $mailManager->get('CustomerRegisteredMail');
+$mailManager->send($mail);
+
+// Without the mail plugin manager:
+$mailManager = $serviceManager->get('Phpro\MailManager');
+$mail = new CustomerRegisteredMail();
 $mailManager->send($mail);
 ```
 

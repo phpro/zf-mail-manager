@@ -3,6 +3,8 @@ namespace Phpro\MailManager;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\ModuleManager\Feature\InitProviderInterface;
+use Zend\ModuleManager\ModuleManagerInterface;
 
 /**
  * Class Module
@@ -11,7 +13,8 @@ use Zend\ModuleManager\Feature\ConfigProviderInterface;
  */
 class Module implements
     AutoloaderProviderInterface,
-    ConfigProviderInterface
+    ConfigProviderInterface,
+    InitProviderInterface
 {
     /**
      * @return mixed
@@ -34,4 +37,25 @@ class Module implements
             ),
         );
     }
+
+    /**
+     * Initialize workflow
+     *
+     * @param  ModuleManagerInterface $moduleManager
+     *
+     * @return void
+     */
+    public function init(ModuleManagerInterface $moduleManager)
+    {
+        $serviceManager = $moduleManager->getEvent()->getParam('ServiceManager');
+        $serviceListener = $serviceManager->get('ServiceListener');
+
+        $serviceListener->addServiceManager(
+            'Phpro\MailManager\PluginManager',
+            'mail_manager',
+            'Phpro\MailManager\Mail\MailInterface',
+            'getMailManagerConfig'
+        );
+    }
+
 }

@@ -14,6 +14,7 @@ use Phpro\MailManager\Service\MailManager as Instance;
 class MailManager
     implements FactoryInterface
 {
+
     /**
      * Create service
      *
@@ -23,9 +24,10 @@ class MailManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        $pluginManager = $serviceLocator->get('Phpro\MailManager\PluginManager');
         $adapter = $serviceLocator->get('Phpro\MailManager\DefaultAdapter');
 
-        $instance = new Instance($adapter);
+        $instance = new Instance($pluginManager, $adapter);
         return $instance;
     }
 

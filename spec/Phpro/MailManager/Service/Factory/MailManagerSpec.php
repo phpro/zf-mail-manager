@@ -19,10 +19,12 @@ class MailManagerSpec extends ObjectBehavior
 
     /**
      * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceManager
+     * @param \Phpro\MailManager\Service\MailPluginManager $pluginManager
      * @param \Phpro\MailManager\Adapter\AdapterInterface $adapter
      */
-    public function it_should_create_an_instance($serviceManager, $adapter)
+    public function it_should_create_an_instance($serviceManager, $pluginManager, $adapter)
     {
+        $serviceManager->get('Phpro\MailManager\PluginManager')->willReturn($pluginManager);
         $serviceManager->get('Phpro\MailManager\DefaultAdapter')->willReturn($adapter);
 
         $this->createService($serviceManager)->shouldBeAnInstanceOf('Phpro\MailManager\Service\MailManager');
