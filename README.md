@@ -13,7 +13,7 @@ php composer.phar install
 
 ### Add to composer.json
 ```
-"phpro/zf-mail-manager": "dev-master"
+"phpro/zf-mail-manager": "~0.2"
 ```
 
 ### Add module to application.config.php
@@ -31,7 +31,7 @@ return array(
 ```php
 return array(
     //
-    // Default Mailmanager settings:
+    // Define a Default Mailmanager
     //
     'service_manager' => array(
         'aliases' => array(
@@ -40,7 +40,7 @@ return array(
     ),
 
     //
-    // Paths to e-mail templates
+    // Paths to e-mail templates for renderable e-mail objects.
     //
     'view_manager' => [
         'template_map' => [
@@ -62,14 +62,14 @@ return array(
 
 ### Create your own Mail objects
 ```php
-use MailManager\Mail\DefaultMail;
+use MailManager\Mail\Base\ZendMail;
 
 /**
  * Class ShareCollection
  *
  * @package MailManager\Mail
  */
-class CustomerRegisteredMail extends DefaultMail
+class CustomerRegisteredMail extends ZendMail
 {
     protected $viewFile = 'mails/customer/registered';
     protected $subject = 'Customer Registered';
@@ -100,5 +100,8 @@ $mailManager->send($mail);
 ```
 
 
-# TODO
-- implement slm/mail services like Mandrill, ... as an Adapater
+# Supported adapters
+At the moment following adapters are supported:
+
+- ZendMail
+- Mandrill
