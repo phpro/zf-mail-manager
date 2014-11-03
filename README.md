@@ -18,6 +18,7 @@ php composer.phar install
 
 ### Add module to application.config.php
 ```php
+<?php
 return array(
     'modules' => array(
         'Phpro\MailManager',
@@ -29,6 +30,7 @@ return array(
 
 ### Add your custom mail settings
 ```php
+<?php
 return array(
     //
     // Define a Default Mailmanager
@@ -62,6 +64,7 @@ return array(
 
 ### Create your own Mail objects
 ```php
+<?php
 use MailManager\Mail\Base\ZendMail;
 
 /**
@@ -88,6 +91,7 @@ class CustomerRegisteredMail extends ZendMail
 
 ### Sending your e-mail:
 ```php
+<?php
 // Through the mail plugin manager:
 $mailManager = $serviceManager->get('Phpro\MailManager');
 $mail = $mailManager->get('CustomerRegisteredMail');
