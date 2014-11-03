@@ -70,7 +70,7 @@ class MandrillSpec extends MailSpec
         $recipient = 'test@dispostable.com';
         $value = ['meta1' => 'meta1'];
         $this->setMetadata($recipient, $value);
-        $res = $this->getMetadata()->shouldReturn([$recipient => $value]);
+        $this->getMetadata()->shouldReturn([$recipient => $value]);
     }
 
     /**
