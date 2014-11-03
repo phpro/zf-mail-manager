@@ -4,15 +4,15 @@ namespace Phpro\MailManager\Adapter\Factory;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Phpro\MailManager\Adapter\MandrillMailAdapter as Instance;
+use Phpro\MailManager\Adapter\MandrillAdapter as Instance;
 
 
 /**
- * Class MandrillMailAdapter
+ * Class MandrillAdapter
  *
  * @package Phpro\MailManager\Adapter\Service\Factory
  */
-class MandrillMailAdapter
+class MandrillAdapter
     implements FactoryInterface
 {
 

@@ -5,11 +5,11 @@ namespace spec\Phpro\MailManager\Adapter\Factory;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class MandrillMailAdapterSpec extends ObjectBehavior
+class MandrillAdapterSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Phpro\MailManager\Adapter\Factory\MandrillMailAdapter');
+        $this->shouldHaveType('Phpro\MailManager\Adapter\Factory\MandrillAdapter');
     }
 
     public function it_is_a_factory()
@@ -25,6 +25,6 @@ class MandrillMailAdapterSpec extends ObjectBehavior
     {
         $serviceManager->get('SlmMail\Mail\Transport\MandrillTransport')->willReturn($transport);
 
-        $this->createService($serviceManager)->shouldBeAnInstanceOf('Phpro\MailManager\Adapter\MandrillMailAdapter');
+        $this->createService($serviceManager)->shouldBeAnInstanceOf('Phpro\MailManager\Adapter\MandrillAdapter');
     }
 }

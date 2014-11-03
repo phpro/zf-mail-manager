@@ -5,12 +5,12 @@ namespace spec\Phpro\MailManager\Mail\Base;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class MandrillMailSpec extends MailSpec
+class MandrillSpec extends MailSpec
 {
 
     public function it_is_a_zend_mail_object()
     {
-        $this->shouldImplement('Phpro\MailManager\Mail\MandrillMailInterface');
+        $this->shouldImplement('Phpro\MailManager\Mail\MandrillInterface');
     }
 
     public function it_should_have_options()

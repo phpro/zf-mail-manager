@@ -3,16 +3,16 @@
 namespace Phpro\MailManager\Adapter;
 
 use Phpro\MailManager\Mail\MailInterface;
-use Phpro\MailManager\Mail\MandrillMailInterface;
-use SlmMail\Mail\Message\Mandrill;
+use Phpro\MailManager\Mail\MandrillInterface;
+use SlmMail\Mail\Message\Mandrill as MandrillMessage;
 use Zend\Mail\Transport\TransportInterface;
 
 /**
- * Class MandrillMailAdapter
+ * Class MandrillAdapter
  *
  * @package Phpro\MailManager\Adapter
  */
-class MandrillMailAdapter implements AdapterInterface
+class MandrillAdapter implements AdapterInterface
 {
 
     /**
@@ -33,7 +33,7 @@ class MandrillMailAdapter implements AdapterInterface
      */
     public function canSend(MailInterface $mail)
     {
-        return $mail instanceof MandrillMailInterface;
+        return $mail instanceof MandrillInterface;
     }
 
     /**
@@ -46,13 +46,13 @@ class MandrillMailAdapter implements AdapterInterface
     }
 
     /**
-     * @param MandrillMailInterface $mail
+     * @param MandrillInterface $mail
      *
      * @return Mandrill
      */
-    protected function createMessage(MandrillMailInterface $mail)
+    protected function createMessage(MandrillInterface $mail)
     {
-        $message = new Mandrill();
+        $message = new MandrillMessage();
         $message->getHeaders()->addHeaders($mail->getHeaders());
         $message->setTo($mail->getTo());
         $message->setCc($mail->getCc());

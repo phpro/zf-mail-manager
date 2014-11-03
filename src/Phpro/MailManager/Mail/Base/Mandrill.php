@@ -2,16 +2,16 @@
 
 namespace Phpro\MailManager\Mail\Base;
 
-use Phpro\MailManager\Mail\MandrillMailInterface;
+use Phpro\MailManager\Mail\MandrillInterface;
 use Zend\Mime\Part;
 
 /**
- * Class MandrillMail
+ * Class Mandrill
  *
  * @package Phpro\MailManager\Mail\Base
  */
-class MandrillMail extends Mail
-    implements MandrillMailInterface
+class Mandrill extends Mail
+    implements MandrillInterface
 {
 
     /**

@@ -4,11 +4,11 @@ namespace Phpro\MailManager\Mail;
 use Zend\Mime\Part;
 
 /**
- * Interface MandrillMailInterface
+ * Interface MandrillInterface
  *
  * @package Phpro\MailManager\Mail
  */
-interface MandrillMailInterface extends MailInterface
+interface MandrillInterface extends MailInterface
 {
 
     /**

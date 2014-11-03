@@ -5,7 +5,7 @@ namespace spec\Phpro\MailManager\Mail\Stub;
 
 use Prophecy\Prophet;
 
-trait ProvidesMandrillMailStubSpec
+trait ProvidesMandrillStubSpec
 {
 
     /**
@@ -15,8 +15,8 @@ trait ProvidesMandrillMailStubSpec
     {
         $prophet = new Prophet();
 
-        /** @var \Phpro\MailManager\Mail\MandrillMailInterface $mail */
-        $mail = $prophet->prophesize('Phpro\MailManager\Mail\MandrillMailInterface');
+        /** @var \Phpro\MailManager\Mail\MandrillInterface $mail */
+        $mail = $prophet->prophesize('Phpro\MailManager\Mail\MandrillInterface');
         $headers = $prophet->prophesize('Zend\Mail\Headers');
 
         $mail->getTo()->willReturn(['me@dispostable.com' => 'me']);
