@@ -60,12 +60,16 @@ class MailManager
         return $this->pluginManager->has($name);
     }
 
-
     /**
      * @param MailInterface $mail
+     * @throws \RuntimeException
      */
     public function send(MailInterface $mail)
     {
+        if (!$this->adapter->canSend($mail)) {
+            throw new \RuntimeException('The e-mail could not be send with current configured mail-adapter.');
+        }
+
         $this->adapter->send($mail);
     }
 

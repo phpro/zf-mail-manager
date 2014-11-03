@@ -37,11 +37,6 @@ interface MailInterface
     public function getHeaders();
 
     /**
-     * @return array
-     */
-    public function getParams();
-
-    /**
      * @return string
      */
     public function getSubject();
@@ -50,15 +45,5 @@ interface MailInterface
      * @return array
      */
     public function getTo();
-
-    /**
-     * @return string
-     */
-    public function getViewFile();
-
-    /**
-     * @return string
-     */
-    public function getLayoutFile();
 
 }

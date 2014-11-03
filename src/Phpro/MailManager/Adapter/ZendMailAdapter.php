@@ -1,8 +1,9 @@
 <?php
 
 namespace Phpro\MailManager\Adapter;
-use Phpro\MailManager\Mail\MailInterface;
 
+use Phpro\MailManager\Mail\MailInterface;
+use Phpro\MailManager\Mail\ZendMailInterface;
 use Phpro\MailManager\Service\BodyRenderer;
 use Zend\Mail;
 use Zend\Mime;
@@ -37,6 +38,14 @@ class ZendMailAdapter
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function canSend(MailInterface $mail)
+    {
+        return ($mail instanceof ZendMailInterface);
+    }
+
+    /**
      * @param MailInterface $mail
      */
     public function send(MailInterface $mail)
@@ -56,11 +65,11 @@ class ZendMailAdapter
     }
 
     /**
-     * @param MailInterface $mail
+     * @param ZendMailInterface $mail
      *
      * @return Mime\Message
      */
-    protected function createMailMessage(MailInterface $mail)
+    protected function createMailMessage(ZendMailInterface $mail)
     {
         $content = $this->getMailBody($mail);
         $message = new Mime\Message();
@@ -75,11 +84,11 @@ class ZendMailAdapter
     }
 
     /**
-     * @param MailInterface $mail
+     * @param ZendMailInterface $mail
      *
      * @return Mime\Part
      */
-    protected function getMailBody(MailInterface $mail)
+    protected function getMailBody(ZendMailInterface $mail)
     {
         $body = $this->bodyRenderer->render($mail);
         $bodyPart = new Mime\Part($body);

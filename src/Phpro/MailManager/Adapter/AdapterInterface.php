@@ -12,6 +12,15 @@ interface AdapterInterface
 {
 
     /**
+     * This method will check if the specified e-mail can be send.
+     *
+     * @param MailInterface $mail
+     *
+     * @return bool
+     */
+    public function canSend(MailInterface $mail);
+
+    /**
      * @param MailInterface $mail
      *
      * @return void

@@ -1,15 +1,17 @@
 <?php
 
-namespace Phpro\MailManager\Mail;
+namespace Phpro\MailManager\Mail\Base;
+
+use Phpro\MailManager\Mail\MailInterface;
 use Zend\Mail\Header\HeaderInterface;
 use Zend\Mail\Headers;
 
 /**
- * Class AbstractMail
+ * Class Mail
  *
- * @package Phpro\MailManager\Mail
+ * @package Phpro\MailManager\Mail\Base
  */
-class DefaultMail
+class Mail
     implements MailInterface
 {
 
@@ -37,21 +39,6 @@ class DefaultMail
      * @var string
      */
     protected $subject;
-
-    /**
-     * @var string
-     */
-    protected $viewFile;
-
-    /**
-     * @var string
-     */
-    protected $layoutFile = 'mails/layout';
-
-    /**
-     * @var array
-     */
-    protected $params = [];
 
     /**
      * @var Headers
@@ -154,23 +141,6 @@ class DefaultMail
     }
 
     /**
-     * @param $key
-     * @param $value
-     */
-    public function addParam($key, $value)
-    {
-        $this->params[$key] = $value;
-    }
-
-    /**
-     * @return array
-     */
-    public function getParams()
-    {
-        return $this->params;
-    }
-
-    /**
      * @param string $subject
      */
     public function setSubject($subject)
@@ -205,38 +175,6 @@ class DefaultMail
     public function getTo()
     {
         return $this->to;
-    }
-
-    /**
-     * @param string $viewFile
-     */
-    public function setViewFile($viewFile)
-    {
-        $this->viewFile = $viewFile;
-    }
-
-    /**
-     * @return string
-     */
-    public function getViewFile()
-    {
-        return $this->viewFile;
-    }
-
-    /**
-     * @param string $layoutFile
-     */
-    public function setLayoutFile($layoutFile)
-    {
-        $this->layoutFile = $layoutFile;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLayoutFile()
-    {
-        return $this->layoutFile;
     }
 
     /**
