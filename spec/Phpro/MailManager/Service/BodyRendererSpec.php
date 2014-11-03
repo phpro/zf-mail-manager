@@ -4,12 +4,12 @@ namespace spec\Phpro\MailManager\Service;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use spec\Phpro\MailManager\Mail\Stub\ProvidesMailStubSpec;
+use spec\Phpro\MailManager\Mail\Stub\ProvidesRenderableMailStubSpec;
 
 class BodyRendererSpec extends ObjectBehavior
 {
 
-    use ProvidesMailStubSpec;
+    use ProvidesRenderableMailStubSpec;
 
     /**
      * @param \Zend\View\Renderer\RendererInterface $viewRenderer

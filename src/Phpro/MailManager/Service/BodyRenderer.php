@@ -2,7 +2,7 @@
 
 namespace Phpro\MailManager\Service;
 
-use Phpro\MailManager\Mail\MailInterface;
+use Phpro\MailManager\Mail\RenderableMailInterface;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\RendererInterface;
 
@@ -28,11 +28,11 @@ class BodyRenderer
     }
 
     /**
-     * @param MailInterface $mail
+     * @param RenderableMailInterface $mail
      *
      * @return string
      */
-    public function render(MailInterface $mail)
+    public function render(RenderableMailInterface $mail)
     {
         $content = $this->renderContent($mail);
         $body = $this->renderLayout($mail, $content);
@@ -40,12 +40,12 @@ class BodyRenderer
     }
 
     /**
-     * @param MailInterface $mail
+     * @param RenderableMailInterface $mail
      * @param null          $content
      *
      * @return string
      */
-    protected function renderLayout(MailInterface $mail, $content = null)
+    protected function renderLayout(RenderableMailInterface $mail, $content = null)
     {
         if (!$content) {
             $content = $this->renderContent($content);
@@ -59,11 +59,11 @@ class BodyRenderer
     }
 
     /**
-     * @param MailInterface $mail
+     * @param RenderableMailInterface $mail
      *
      * @return string
      */
-    protected function renderContent(MailInterface $mail)
+    protected function renderContent(RenderableMailInterface $mail)
     {
         $viewModel = new ViewModel();
         $viewModel->setTemplate($mail->getViewFile());

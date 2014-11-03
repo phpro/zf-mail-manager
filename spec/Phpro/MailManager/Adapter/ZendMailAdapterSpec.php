@@ -4,13 +4,13 @@ namespace spec\Phpro\MailManager\Adapter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use spec\Phpro\MailManager\Mail\Stub\ProvidesMailStubSpec;
+use spec\Phpro\MailManager\Mail\Stub\ProvidesZendMailStubSpec;
 
 class ZendMailAdapterSpec extends ObjectBehavior
 {
 
     use ProvidesAdapterInterfaceSpec;
-    use ProvidesMailStubSpec;
+    use ProvidesZendMailStubSpec;
 
     /**
      *

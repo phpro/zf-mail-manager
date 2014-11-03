@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Phpro\MailManager\Mail;
 
 /**
@@ -8,22 +7,7 @@ namespace Phpro\MailManager\Mail;
  *
  * @package Phpro\MailManager\Mail
  */
-interface ZendMailInterface extends MailInterface
+interface ZendMailInterface extends MailInterface, RenderableMailInterface
 {
-
-    /**
-     * @return array
-     */
-    public function getParams();
-
-    /**
-     * @return string
-     */
-    public function getViewFile();
-
-    /**
-     * @return string
-     */
-    public function getLayoutFile();
 
 }
