@@ -8,6 +8,11 @@ use Prophecy\Argument;
 class ZendMailSpec extends MailSpec
 {
 
+    public function it_is_a_zend_mail_object()
+    {
+        $this->shouldImplement('Phpro\MailManager\Mail\ZendMailInterface');
+    }
+
     public function it_should_provide_a_view_file()
     {
         $value = 'view-file';

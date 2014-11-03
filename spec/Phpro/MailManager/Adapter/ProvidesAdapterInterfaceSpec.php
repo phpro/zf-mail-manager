@@ -6,6 +6,6 @@ trait ProvidesAdapterInterfaceSpec
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Phpro\MailManager\Adapter\ZendMailAdapter');
+        $this->shouldImplement('Phpro\MailManager\Adapter\AdapterInterface');
     }
 }

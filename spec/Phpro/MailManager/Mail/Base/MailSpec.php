@@ -7,7 +7,7 @@ use Prophecy\Argument;
 
 class MailSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
+    public function it_is_a_base_mail()
     {
         $this->shouldHaveType('Phpro\MailManager\Mail\Base\Mail');
     }

@@ -21,6 +21,14 @@ class MandrillMailAdapter implements AdapterInterface
     protected $transport;
 
     /**
+     * @param $transport
+     */
+    public function __construct($transport)
+    {
+        $this->transport = $transport;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function canSend(MailInterface $mail)
