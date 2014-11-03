@@ -185,6 +185,18 @@ class Mandrill extends Mail
     }
 
     /**
+     * @param $key
+     * @param $value
+     *
+     * @return $this
+     */
+    public function addGlobalVariable($key, $value)
+    {
+        $this->globalVariables[$key] = $value;
+        return $this;
+    }
+
+    /**
      * Get the global parameters to use with the template
      *
      * @return array
@@ -226,6 +238,18 @@ class Mandrill extends Mail
     public function setGlobalMetadata(array $globalMetadata)
     {
         $this->globalMetadata = $globalMetadata;
+        return $this;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     *
+     * @return $this
+     */
+    public function addGlobalMetadata($key, $value)
+    {
+        $this->globalMetadata[$key] = $value;
         return $this;
     }
 

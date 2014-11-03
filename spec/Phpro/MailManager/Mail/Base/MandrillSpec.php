@@ -45,7 +45,8 @@ class MandrillSpec extends MailSpec
     {
         $value = ['var1' => 'var1'];
         $this->setGlobalVariables($value);
-        $this->getGlobalVariables()->shouldReturn($value);
+        $this->addGlobalVariable('var2', 'var2');
+        $this->getGlobalVariables()->shouldReturn(['var1' => 'var1', 'var2' => 'var2']);
     }
 
     public function it_should_have_variables()
@@ -60,7 +61,8 @@ class MandrillSpec extends MailSpec
     {
         $value = ['meta1' => 'meta1'];
         $this->setGlobalMetadata($value);
-        $this->getGlobalMetadata()->shouldReturn($value);
+        $this->addGlobalMetadata('meta2', 'meta2');
+        $this->getGlobalMetadata()->shouldReturn(['meta1' => 'meta1', 'meta2' => 'meta2']);
     }
 
     public function it_should_have_metadata()
