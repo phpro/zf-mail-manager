@@ -21,4 +21,4 @@ interface RenderableMailInterface
      * @return string
      */
     public function getLayoutFile();
-} 
+}

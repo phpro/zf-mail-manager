@@ -4,6 +4,7 @@ return [
     'service_manager' => [
         'factories' => [
             'Phpro\MailManager\Adapter\ZendMailAdapter' => 'Phpro\MailManager\Adapter\Factory\ZendMailAdapter',
+            'Phpro\MailManager\Adapter\MandrillMailAdapter' => 'Phpro\MailManager\Adapter\Factory\MandrillMailAdapter',
             'Phpro\MailManager\Service\BodyRenderer' => 'Phpro\MailManager\Service\Factory\BodyRenderer',
             'Phpro\MailManager\Service\MailManager' => 'Phpro\MailManager\Service\Factory\MailManager',
             'Phpro\MailManager\Service\MailPluginManager' => 'Phpro\MailManager\Service\Factory\MailPluginManager',
