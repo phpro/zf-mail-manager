@@ -5,7 +5,8 @@ namespace spec\Phpro\MailManager\Adapter;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SlmMail\Mail\Message\Mandrill;
-use spec\Phpro\MailManager\Mail\Stub\ProvidesMandrillStubSpec;
+use stub\Phpro\MailManager\Mail\ProvidesMandrillStubSpec;
+use stub\Phpro\MailManager\Adapter\ProvidesAdapterInterfaceSpec;
 
 class MandrillAdapterSpec extends ObjectBehavior
 {
@@ -16,16 +17,17 @@ class MandrillAdapterSpec extends ObjectBehavior
     /**
      *
      * @param \Zend\Mail\Transport\TransportInterface $transport
+     * @param \Phpro\MailManager\Service\MailMessageCreator $messageCreator
      */
-    public function let($transport)
+    public function let($transport, $messageCreator)
     {
-        $this->beConstructedWith($transport);
+        $this->beConstructedWith($transport, $messageCreator);
     }
 
     /**
      * @param \Zend\Mail\Transport\TransportInterface $transport
      */
-    public function it_should_send_a_mail($transport)
+    public function it_should_send_a_mail_with_mandrill_template($transport)
     {
         $mail = $this->getMailStub();
         $transport->send(Argument::that(function ($message) use ($mail) {
@@ -45,6 +47,32 @@ class MandrillAdapterSpec extends ObjectBehavior
                 && $message->getImages() == []
                 && $message->getTags() == ['tag1', 'tag2'];
         }))->shouldBeCalled();
+
+        $this->send($mail);
+    }
+
+    /**
+     * @param \Zend\Mail\Transport\TransportInterface $transport
+     * @param \Phpro\MailManager\Service\MailMessageCreator $messageCreator
+     * @param \Zend\Mime\Message $mailMessage
+     */
+    public function it_should_send_a_mail_with_zend_view_renderer($transport, $messageCreator, $mailMessage)
+    {
+        $mail = $this->getRenderableMailStub();
+        $messageCreator->createMessage($mail)->willReturn($mailMessage);
+
+        $transport->send(Argument::that(function ($message) use ($mail, $mailMessage) {
+            return $message instanceof Mandrill
+                && $message->getTo()->has('me@dispostable.com')
+                && $message->getCc()->has('me@dispostable.com')
+                && $message->getBcc()->has('me@dispostable.com')
+                && $message->getFrom()->has('me@dispostable.com')
+                && $message->getSubject() == $mail->getSubject()
+                && $message->getOptions() == ['subaccount' => 'test']
+                && $message->getImages() == []
+                && $message->getTags() == ['tag1', 'tag2']
+                && $message->getBody() == $mailMessage->getWrappedObject();
+            }))->shouldBeCalled();
 
         $this->send($mail);
     }

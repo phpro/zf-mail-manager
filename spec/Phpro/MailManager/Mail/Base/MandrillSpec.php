@@ -82,5 +82,4 @@ class MandrillSpec extends MailSpec
         $this->addImage($image);
         $this->getImages()->shouldReturn([$image, $image]);
     }
-
 }

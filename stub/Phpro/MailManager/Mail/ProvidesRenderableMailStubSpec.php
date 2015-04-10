@@ -1,7 +1,6 @@
 <?php
 
-namespace spec\Phpro\MailManager\Mail\Stub;
-
+namespace stub\Phpro\MailManager\Mail;
 
 use Prophecy\Prophet;
 
@@ -24,5 +23,4 @@ trait ProvidesRenderableMailStubSpec
 
         return $mail->reveal();
     }
-
 }

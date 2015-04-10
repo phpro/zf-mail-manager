@@ -4,9 +4,8 @@ namespace Phpro\MailManager\Adapter;
 
 use Phpro\MailManager\Mail\MailInterface;
 use Phpro\MailManager\Mail\ZendMailInterface;
-use Phpro\MailManager\Service\BodyRenderer;
+use Phpro\MailManager\Service\MailMessageCreator;
 use Zend\Mail;
-use Zend\Mime;
 
 /**
  * Class ZendMailAdapter
@@ -23,18 +22,18 @@ class ZendMailAdapter
     protected $transport;
 
     /**
-     * @var BodyRenderer
+     * @var MailMessageCreator
      */
-    protected $bodyRenderer;
+    protected $messageCreator;
 
     /**
      * @param $transport
-     * @param $bodyRenderer
+     * @param $messageCreator
      */
-    public function __construct($transport, $bodyRenderer)
+    public function __construct($transport, $messageCreator)
     {
         $this->transport = $transport;
-        $this->bodyRenderer = $bodyRenderer;
+        $this->messageCreator = $messageCreator;
     }
 
     /**
@@ -50,8 +49,17 @@ class ZendMailAdapter
      */
     public function send(MailInterface $mail)
     {
-        $body = $this->createMailMessage($mail);
+        $message = $this->createMessage($mail);
+        $this->transport->send($message);
+    }
 
+    /**
+     * @param ZendMailInterface $mail
+     *
+     * @return Mail\Message
+     */
+    protected function createMessage(ZendMailInterface $mail)
+    {
         $message = new Mail\Message();
         $message->getHeaders()->addHeaders($mail->getHeaders());
         $message->setTo($mail->getTo());
@@ -59,60 +67,8 @@ class ZendMailAdapter
         $message->setBcc($mail->getBcc());
         $message->setFrom($mail->getFrom());
         $message->setSubject($mail->getSubject());
-        $message->setBody($body);
-
-        $this->transport->send($message);
-    }
-
-    /**
-     * @param ZendMailInterface $mail
-     *
-     * @return Mime\Message
-     */
-    protected function createMailMessage(ZendMailInterface $mail)
-    {
-        $content = $this->getMailBody($mail);
-        $message = new Mime\Message();
-        $message->addPart($content);
-
-        foreach ($mail->getAttachments() as $name => $file) {
-            $attachment = $this->createAttachment($file, $name);
-            $message->addPart($attachment);
-        }
+        $message->setBody($this->messageCreator->createMessage($mail));
 
         return $message;
     }
-
-    /**
-     * @param ZendMailInterface $mail
-     *
-     * @return Mime\Part
-     */
-    protected function getMailBody(ZendMailInterface $mail)
-    {
-        $body = $this->bodyRenderer->render($mail);
-        $bodyPart = new Mime\Part($body);
-        $bodyPart->type = Mime\Mime::TYPE_HTML;
-
-        return $bodyPart;
-    }
-
-    /**
-     * @param $file
-     * @param $name
-     *
-     * @return Mime\Part
-     */
-    protected function createAttachment($file, $name)
-    {
-        $attachment              = new Mime\Part($file);
-        $attachment->type        = Mime\Mime::TYPE_OCTETSTREAM;
-        $attachment->disposition = Mime\Mime::DISPOSITION_ATTACHMENT;
-        $attachment->encoding    = Mime\Mime::ENCODING_BASE64;
-        $attachment->filename    = $name;
-        $attachment->id          = $name;
-
-        return $attachment;
-    }
-
 }

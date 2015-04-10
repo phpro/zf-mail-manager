@@ -1,6 +1,7 @@
 <?php
 
 namespace Phpro\MailManager\Mail;
+
 use Zend\Mime\Part;
 
 /**
@@ -8,7 +9,7 @@ use Zend\Mime\Part;
  *
  * @package Phpro\MailManager\Mail
  */
-interface MandrillInterface extends MailInterface
+interface MandrillInterface extends MailInterface, RenderableMailInterface
 {
 
     /**
@@ -74,4 +75,8 @@ interface MandrillInterface extends MailInterface
      */
     public function getImages();
 
+    /**
+     * @return bool
+     */
+    public function useMandrillTemplate();
 }

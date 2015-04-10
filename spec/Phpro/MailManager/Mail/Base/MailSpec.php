@@ -90,5 +90,4 @@ class MailSpec extends ObjectBehavior
         $result['Reply-To']->shouldBe('me@dispostable.com');
         $result['Content-Type']->shouldBe('text/html');
     }
-
 }

@@ -33,7 +33,7 @@
       "Phpro\\MailManager": "src/"
     },
     "psr-4": {
-      "spec\\Phpro\\MailManager\\": "spec/Phpro/MailManager/"
+      "stub\\Phpro\\MailManager\\": "stub/Phpro/MailManager/"
     }
   }
 }

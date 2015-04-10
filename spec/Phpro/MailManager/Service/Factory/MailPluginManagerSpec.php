@@ -17,5 +17,4 @@ class MailPluginManagerSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Zend\Mvc\Service\AbstractPluginManagerFactory');
     }
-
 }

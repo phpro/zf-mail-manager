@@ -7,6 +7,7 @@ return [
             'Phpro\MailManager\Adapter\MandrillAdapter' => 'Phpro\MailManager\Adapter\Factory\MandrillAdapter',
             'Phpro\MailManager\Service\BodyRenderer' => 'Phpro\MailManager\Service\Factory\BodyRenderer',
             'Phpro\MailManager\Service\MailManager' => 'Phpro\MailManager\Service\Factory\MailManager',
+            'Phpro\MailManager\Service\MailMessageCreator' => 'Phpro\MailManager\Service\Factory\MailMessageCreator',
             'Phpro\MailManager\Service\MailPluginManager' => 'Phpro\MailManager\Service\Factory\MailPluginManager',
         ],
         'aliases' => [

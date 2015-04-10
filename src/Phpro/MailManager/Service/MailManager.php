@@ -1,6 +1,7 @@
 <?php
 
 namespace Phpro\MailManager\Service;
+
 use Phpro\MailManager\Adapter\AdapterInterface;
 use Phpro\MailManager\Mail\MailInterface;
 use Zend\ServiceManager\Exception;
@@ -72,5 +73,4 @@ class MailManager
 
         $this->adapter->send($mail);
     }
-
 }

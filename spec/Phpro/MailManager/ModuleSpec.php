@@ -52,5 +52,4 @@ class ModuleSpec extends ObjectBehavior
 
         $this->init($moduleManager);
     }
-
 }

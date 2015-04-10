@@ -4,7 +4,7 @@ namespace spec\Phpro\MailManager\Service;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use spec\Phpro\MailManager\Mail\Stub\ProvidesRenderableMailStubSpec;
+use stub\Phpro\MailManager\Mail\ProvidesRenderableMailStubSpec;
 
 class BodyRendererSpec extends ObjectBehavior
 {
@@ -35,15 +35,15 @@ class BodyRendererSpec extends ObjectBehavior
 
         // Body Rendering
         $viewRenderer->render(Argument::that(function ($viewModel) use ($mail) {
-            return $viewModel->getTemplate() === $mail->getViewFile()
-                && $viewModel->terminate() === true
+            return $viewModel->getTemplate() == $mail->getViewFile()
+                && $viewModel->terminate() == true
                 && $viewModel->getVariables()['param1'] == $mail->getParams()['param1'];
         }))->willReturn($parsedBody);
 
         // Lay-out rendering
         $viewRenderer->render(Argument::that(function ($viewModel) use ($mail, $parsedBody) {
-            return $viewModel->getTemplate() === $mail->getLayoutFile()
-                && $viewModel->terminate() === true
+            return $viewModel->getTemplate() == $mail->getLayoutFile()
+                && $viewModel->terminate() == true
                 && $viewModel->getVariables()['mailBody'] == $parsedBody;
         }))->willReturn($parsedTemplate);
 

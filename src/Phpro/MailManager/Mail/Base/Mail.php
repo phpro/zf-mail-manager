@@ -203,5 +203,4 @@ class Mail
         }
         return $this->headers;
     }
-
 }

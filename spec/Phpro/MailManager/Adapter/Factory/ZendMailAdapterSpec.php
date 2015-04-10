@@ -19,11 +19,11 @@ class ZendMailAdapterSpec extends ObjectBehavior
 
     /**
      * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceManager
-     * @param \Phpro\MailManager\Service\BodyRenderer $bodyRenderer
+     * @param \Phpro\MailManager\Service\MailMessageCreator $messageCreator
      */
-    public function it_should_create_an_instance($serviceManager, $bodyRenderer)
+    public function it_should_create_an_instance($serviceManager, $messageCreator)
     {
-        $serviceManager->get('Phpro\MailManager\Service\BodyRenderer')->willReturn($bodyRenderer);
+        $serviceManager->get('Phpro\MailManager\Service\MailMessageCreator')->willReturn($messageCreator);
 
         $this->createService($serviceManager)->shouldBeAnInstanceOf('Phpro\MailManager\Adapter\ZendMailAdapter');
     }

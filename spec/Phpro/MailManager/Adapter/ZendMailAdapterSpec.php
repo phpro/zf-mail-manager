@@ -4,7 +4,8 @@ namespace spec\Phpro\MailManager\Adapter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use spec\Phpro\MailManager\Mail\Stub\ProvidesZendMailStubSpec;
+use stub\Phpro\MailManager\Adapter\ProvidesAdapterInterfaceSpec;
+use stub\Phpro\MailManager\Mail\ProvidesZendMailStubSpec;
 
 class ZendMailAdapterSpec extends ObjectBehavior
 {
@@ -15,32 +16,24 @@ class ZendMailAdapterSpec extends ObjectBehavior
     /**
      *
      * @param \Zend\Mail\Transport\TransportInterface $transport
-     * @param \Phpro\MailManager\Service\BodyRenderer $bodyRenderer
+     * @param \Phpro\MailManager\Service\MailMessageCreator $messageCreator
      */
-    public function let($transport, $bodyRenderer)
+    public function let($transport, $messageCreator)
     {
-        $this->beConstructedWith($transport, $bodyRenderer);
+        $this->beConstructedWith($transport, $messageCreator);
     }
 
     /**
      * @param \Zend\Mail\Transport\TransportInterface $transport
-     * @param \Phpro\MailManager\Service\BodyRenderer $bodyRenderer
+     * @param \Phpro\MailManager\Service\MailMessageCreator $messageCreator
+     * @param \Zend\Mime\Message $mailMessage
      */
-    public function it_should_send_a_mail($transport, $bodyRenderer)
+    public function it_should_send_a_mail($transport, $messageCreator, $mailMessage)
     {
         $mail = $this->getMailStub();
-        $content = '<html></html>';
-        $bodyRenderer->render($mail)->willReturn($content);
-        $transport->send(Argument::that(function ($message) use ($mail, $content) {
-
-            $body = $message->getBody();
-            $parts = $body->getParts();
-
-            return $parts[0]->getRawContent() == $content
-                && $parts[0]->type == 'text/html'
-                && $parts[1]->getRawContent() == '/tmp/file.txt'
-                && $parts[1]->id == 'name'
-                && $parts[1]->filename == 'name'
+        $messageCreator->createMessage($mail)->willReturn($mailMessage);
+        $transport->send(Argument::that(function ($message) use ($mail, $mailMessage) {
+            return $message->getBody() == $mailMessage->getWrappedObject()
                 && $message->getTo()->has('me@dispostable.com')
                 && $message->getCc()->has('me@dispostable.com')
                 && $message->getBcc()->has('me@dispostable.com')

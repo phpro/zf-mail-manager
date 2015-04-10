@@ -1,7 +1,6 @@
 <?php
 
-namespace spec\Phpro\MailManager\Mail\Stub;
-
+namespace stub\Phpro\MailManager\Mail;
 
 use Prophecy\Prophet;
 
@@ -9,9 +8,9 @@ trait ProvidesMandrillStubSpec
 {
 
     /**
-     * @return \Phpro\MailManager\Mail\MailInterface
+     * @return \Phpro\MailManager\Mail\MandrillInterface
      */
-    protected function getMailStub()
+    protected function createEmptyMailStub()
     {
         $prophet = new Prophet();
 
@@ -29,16 +28,38 @@ trait ProvidesMandrillStubSpec
         $mail->getAttachments()->willReturn(['name' => '/tmp/file.txt']);
 
         $mail->getOptions()->willReturn(['subaccount' => 'test']);
+        $mail->getImages()->willReturn([]);
+        $mail->getTags()->willReturn(['tag1', 'tag2']);
         $mail->getGlobalMetadata()->willReturn(['meta1' => 'meta1']);
         $mail->getMetadata()->willReturn(['me@dispostable.com' => ['meta2' => 'meta2']]);
+
+        return $mail;
+    }
+
+    /**
+     * @return \Phpro\MailManager\Mail\MailInterface
+     */
+    protected function getMailStub()
+    {
+        $mail = $this->createEmptyMailStub();
+        $mail->useMandrillTemplate()->willReturn(true);
         $mail->getGlobalVariables()->willReturn(['var1' => 'var1']);
         $mail->getVariables()->willReturn(['me@dispostable.com' => ['var2' => 'var2']]);
         $mail->getTemplate()->willReturn('template');
         $mail->getTemplateContent()->willReturn(['content1' => 'content1']);
-        $mail->getImages()->willReturn([]);
-        $mail->getTags()->willReturn(['tag1', 'tag2']);
-
         return $mail->reveal();
     }
 
+    /**
+     * @return \Phpro\MailManager\Mail\MailInterface
+     */
+    protected  function getRenderableMailStub()
+    {
+        $mail = $this->createEmptyMailStub();
+        $mail->useMandrillTemplate()->willReturn(false);
+        $mail->getLayoutFile()->willReturn('layout');
+        $mail->getViewFile()->willReturn('view');
+        $mail->getParams()->willReturn(['param1' => 'value1']);
+        return $mail->reveal();
+    }
 }

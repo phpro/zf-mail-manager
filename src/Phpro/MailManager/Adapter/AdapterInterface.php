@@ -1,6 +1,7 @@
 <?php
 
 namespace Phpro\MailManager\Adapter;
+
 use Phpro\MailManager\Mail\MailInterface;
 
 /**
@@ -26,5 +27,4 @@ interface AdapterInterface
      * @return void
      */
     public function send(MailInterface $mail);
-
 }

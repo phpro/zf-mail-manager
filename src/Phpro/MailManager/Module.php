@@ -57,5 +57,4 @@ class Module implements
             'getMailManagerConfig'
         );
     }
-
 }

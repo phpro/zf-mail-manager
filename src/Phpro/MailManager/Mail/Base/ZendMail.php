@@ -84,5 +84,4 @@ class ZendMail extends Mail
     {
         return $this->layoutFile;
     }
-
 }

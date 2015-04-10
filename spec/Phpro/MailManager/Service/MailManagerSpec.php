@@ -42,5 +42,4 @@ class MailManagerSpec extends ObjectBehavior
         $adapter->canSend($mail)->willReturn(false);
         $this->shouldThrow('RuntimeException')->duringSend($mail);
     }
-
 }

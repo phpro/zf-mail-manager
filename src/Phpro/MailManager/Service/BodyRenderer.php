@@ -72,5 +72,4 @@ class BodyRenderer
 
         return $this->viewRenderer->render($viewModel);
     }
-
 }

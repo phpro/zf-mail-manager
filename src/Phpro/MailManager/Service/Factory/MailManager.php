@@ -30,5 +30,4 @@ class MailManager
         $instance = new Instance($pluginManager, $adapter);
         return $instance;
     }
-
 }

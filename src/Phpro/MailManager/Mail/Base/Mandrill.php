@@ -60,6 +60,27 @@ class Mandrill extends Mail
     protected $images = array();
 
     /**
+     * @var string
+     */
+    protected $viewFile;
+
+    /**
+     * @var string
+     */
+    protected $layoutFile = 'mails/layout';
+
+    /**
+     * @var array
+     */
+    protected $params = [];
+
+    /**
+     * @var bool
+     */
+    protected $useMandrillTemplate = true;
+
+
+    /**
      * Add options to the message
      *
      * @param  array $options
@@ -320,4 +341,76 @@ class Mandrill extends Mail
         return $this->images;
     }
 
+    /**
+     * @param array $params
+     */
+    public function setParams($params)
+    {
+        $this->params = $params;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function addParam($key, $value)
+    {
+        $this->params[$key] = $value;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+
+    /**
+     * @param string $viewFile
+     */
+    public function setViewFile($viewFile)
+    {
+        $this->viewFile = $viewFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewFile()
+    {
+        return $this->viewFile;
+    }
+
+    /**
+     * @param string $layoutFile
+     */
+    public function setLayoutFile($layoutFile)
+    {
+        $this->layoutFile = $layoutFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLayoutFile()
+    {
+        return $this->layoutFile;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function useMandrillTemplate()
+    {
+        return $this->useMandrillTemplate;
+    }
+
+    /**
+     * @param boolean $useMandrillTemplate
+     */
+    public function setUseMandrillTemplate($useMandrillTemplate)
+    {
+        $this->useMandrillTemplate = $useMandrillTemplate;
+    }
 }

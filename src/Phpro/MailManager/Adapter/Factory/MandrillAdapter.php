@@ -6,7 +6,6 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Phpro\MailManager\Adapter\MandrillAdapter as Instance;
 
-
 /**
  * Class MandrillAdapter
  *
@@ -22,9 +21,9 @@ class MandrillAdapter
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $transport = $serviceLocator->get('SlmMail\Mail\Transport\MandrillTransport');
+        $messageCreator = $serviceLocator->get('Phpro\MailManager\Service\MailMessageCreator');
 
-        $instance = new Instance($transport);
+        $instance = new Instance($transport, $messageCreator);
         return $instance;
     }
-
 }

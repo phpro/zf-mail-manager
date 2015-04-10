@@ -4,14 +4,14 @@ namespace Phpro\MailManager\Service\Factory;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Phpro\MailManager\Service\BodyRenderer as Instance;
+use Phpro\MailManager\Service\MailMessageCreator as Instance;
 
 /**
  * Class SendMail
  *
  * @package Phpro\MailManager\Service\Factory
  */
-class BodyRenderer
+class MailMessageCreator
     implements FactoryInterface
 {
     /**
@@ -23,9 +23,8 @@ class BodyRenderer
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $viewRenderer = $serviceLocator->get('viewrenderer');
-
-        $instance = new Instance($viewRenderer);
+        $bodyRenderer = $serviceLocator->get('Phpro\MailManager\Service\BodyRenderer');
+        $instance = new Instance($bodyRenderer);
         return $instance;
     }
 }

@@ -7,7 +7,6 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Mail;
 use Phpro\MailManager\Adapter\ZendMailAdapter as Instance;
 
-
 /**
  * Class ZendMailAdapter
  *
@@ -28,10 +27,9 @@ class ZendMailAdapter
     {
         // Todo: make transport configurable
         $transport = new Mail\Transport\Sendmail();
-        $bodyRenderer = $serviceLocator->get('Phpro\MailManager\Service\BodyRenderer');
+        $messageCreator = $serviceLocator->get('Phpro\MailManager\Service\MailMessageCreator');
 
-        $instance = new Instance($transport, $bodyRenderer);
+        $instance = new Instance($transport, $messageCreator);
         return $instance;
     }
-
 }

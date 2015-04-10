@@ -36,5 +36,4 @@ class ZendMailSpec extends MailSpec
         $result['param1']->shouldBe('value1');
         $result['param2']->shouldBe('value2');
     }
-
 }

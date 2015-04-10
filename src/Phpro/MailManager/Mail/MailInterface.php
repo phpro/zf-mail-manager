@@ -1,6 +1,7 @@
 <?php
 
 namespace Phpro\MailManager\Mail;
+
 use Zend\Mail\Headers;
 
 /**
@@ -45,5 +46,4 @@ interface MailInterface
      * @return array
      */
     public function getTo();
-
 }

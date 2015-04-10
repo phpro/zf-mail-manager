@@ -4,6 +4,7 @@ namespace Phpro\MailManager\Adapter;
 
 use Phpro\MailManager\Mail\MailInterface;
 use Phpro\MailManager\Mail\MandrillInterface;
+use Phpro\MailManager\Service\MailMessageCreator;
 use SlmMail\Mail\Message\Mandrill as MandrillMessage;
 use Zend\Mail\Transport\TransportInterface;
 
@@ -21,11 +22,18 @@ class MandrillAdapter implements AdapterInterface
     protected $transport;
 
     /**
-     * @param $transport
+     * @var MailMessageCreator
      */
-    public function __construct($transport)
+    protected $messageCreator;
+
+    /**
+     * @param $transport
+     * @param $messageCreator
+     */
+    public function __construct($transport, $messageCreator)
     {
         $this->transport = $transport;
+        $this->messageCreator = $messageCreator;
     }
 
     /**
@@ -68,16 +76,23 @@ class MandrillAdapter implements AdapterInterface
 
         $message->setOptions($mail->getOptions());
         $message->setTags($mail->getTags());
-        $message->setTemplate($mail->getTemplate());
-        $message->setTemplateContent($mail->getTemplateContent());
-        $message->setGlobalVariables($mail->getGlobalVariables());
-        $message->setGlobalMetadata($mail->getGlobalMetadata());
         $message->setImages($mail->getImages());
 
-        if ($mail->getVariables()) {
-            foreach ($mail->getVariables() as $recipient => $variables) {
-                $message->setVariables($recipient, $variables);
+        if ($mail->useMandrillTemplate()) {
+            // USe build-in template functionality in mandrill?
+            $message->setTemplate($mail->getTemplate());
+            $message->setTemplateContent($mail->getTemplateContent());
+            $message->setGlobalVariables($mail->getGlobalVariables());
+            $message->setGlobalMetadata($mail->getGlobalMetadata());
+
+            if ($mail->getVariables()) {
+                foreach ($mail->getVariables() as $recipient => $variables) {
+                    $message->setVariables($recipient, $variables);
+                }
             }
+        } else {
+            // Use the bodyrenderer
+            $message->setBody($this->messageCreator->createMessage($mail));
         }
 
         if ($mail->getMetadata()) {
@@ -88,6 +103,4 @@ class MandrillAdapter implements AdapterInterface
 
         return $message;
     }
-
-
 }

@@ -9,5 +9,4 @@ namespace Phpro\MailManager\Mail;
  */
 interface ZendMailInterface extends MailInterface, RenderableMailInterface
 {
-
 }

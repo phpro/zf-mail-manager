@@ -36,5 +36,4 @@ class MailPluginManager extends AbstractPluginManager
             (is_object($plugin) ? get_class($plugin) : gettype($plugin))
         ));
     }
-
 }

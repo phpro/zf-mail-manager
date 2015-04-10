@@ -3,8 +3,7 @@
 
 namespace Phpro\MailManager\Mail;
 
-
-interface RenderableMailInterface
+interface RenderableMailInterface extends MailInterface
 {
 
     /**

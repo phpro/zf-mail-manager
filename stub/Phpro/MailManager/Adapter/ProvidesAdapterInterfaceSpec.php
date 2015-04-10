@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Phpro\MailManager\Adapter;
+namespace stub\Phpro\MailManager\Adapter;
 
 trait ProvidesAdapterInterfaceSpec
 {
