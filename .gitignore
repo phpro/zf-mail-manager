@@ -4,7 +4,7 @@ atlassian-ide-plugin.xml
 composer.lock
 composer.phar
 vendor
-
+.php_cs.cache
 
 # OS generated files #
 ######################

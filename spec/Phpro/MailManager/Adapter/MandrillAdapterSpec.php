@@ -76,5 +76,4 @@ class MandrillAdapterSpec extends ObjectBehavior
 
         $this->send($mail);
     }
-
 }

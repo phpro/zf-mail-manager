@@ -53,7 +53,7 @@ trait ProvidesMandrillStubSpec
     /**
      * @return \Phpro\MailManager\Mail\MailInterface
      */
-    protected  function getRenderableMailStub()
+    protected function getRenderableMailStub()
     {
         $mail = $this->createEmptyMailStub();
         $mail->useMandrillTemplate()->willReturn(false);
