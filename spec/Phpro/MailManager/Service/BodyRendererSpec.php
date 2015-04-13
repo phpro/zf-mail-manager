@@ -33,19 +33,16 @@ class BodyRendererSpec extends ObjectBehavior
         $parsedTemplate = '<html><body></body></html>';
         $parsedBody = '<body></body>';
 
-        // Body Rendering
-        $viewRenderer->render(Argument::that(function ($viewModel) use ($mail) {
-            return $viewModel->getTemplate() == $mail->getViewFile()
-                && $viewModel->terminate() == true
-                && $viewModel->getVariables()['param1'] == $mail->getParams()['param1'];
-        }))->willReturn($parsedBody);
-
         // Lay-out rendering
-        $viewRenderer->render(Argument::that(function ($viewModel) use ($mail, $parsedBody) {
-            return $viewModel->getTemplate() == $mail->getLayoutFile()
-                && $viewModel->terminate() == true
-                && $viewModel->getVariables()['mailBody'] == $parsedBody;
-        }))->willReturn($parsedTemplate);
+        $viewRenderer->render(Argument::type('Zend\View\Model\ViewModel'))
+            ->will(function($arguments) use ($mail, $parsedBody, $parsedTemplate) {
+                $viewModel = $arguments[0];
+                if ($mail->getLayoutFile() == $viewModel->getTemplate()) {
+                    return sprintf('<html>%s</html>', $viewModel->getVariables()['mailBody']);
+                } else {
+                    return $parsedBody;
+                }
+            });
 
         // Run method:
         $html = $this->render($mail);

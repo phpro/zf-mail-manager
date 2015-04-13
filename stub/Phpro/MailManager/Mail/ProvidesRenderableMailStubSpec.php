@@ -20,6 +20,7 @@ trait ProvidesRenderableMailStubSpec
         $mail->getParams()->willReturn(['param1' => 'value1']);
         $mail->getViewFile()->willReturn('view-file');
         $mail->getLayoutFile()->willReturn('layout-file');
+        $mail->getAttachments()->willReturn([]);
 
         return $mail->reveal();
     }
