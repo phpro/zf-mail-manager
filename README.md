@@ -13,7 +13,7 @@ php composer.phar install
 
 ### Add to composer.json
 ```
-"phpro/zf-mail-manager": "~0.2"
+"phpro/zf-mail-manager": "~0.3"
 ```
 
 ### Add module to application.config.php
