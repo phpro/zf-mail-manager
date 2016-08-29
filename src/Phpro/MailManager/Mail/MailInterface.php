@@ -46,4 +46,9 @@ interface MailInterface
      * @return array
      */
     public function getTo();
+
+    /**
+     * @return array
+     */
+    public function getReplyTo();
 }

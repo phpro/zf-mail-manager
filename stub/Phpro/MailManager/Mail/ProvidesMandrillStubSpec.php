@@ -22,6 +22,7 @@ trait ProvidesMandrillStubSpec
         $mail->getCc()->willReturn(['me@dispostable.com' => 'me']);
         $mail->getBcc()->willReturn(['me@dispostable.com' => 'me']);
         $mail->getFrom()->willReturn(['me@dispostable.com' => 'me']);
+        $mail->getReplyTo()->willReturn(['me@dispostable.com' => 'me']);
         $mail->getSubject()->willReturn('Subject');
 
         $mail->getHeaders()->willReturn($headers);

@@ -36,6 +36,7 @@ class MandrillAdapterSpec extends ObjectBehavior
                 && $message->getCc()->has('me@dispostable.com')
                 && $message->getBcc()->has('me@dispostable.com')
                 && $message->getFrom()->has('me@dispostable.com')
+                && $message->getReplyTo()->has('me@dispostable.com')
                 && $message->getSubject() == $mail->getSubject()
                 && $message->getOptions() == ['subaccount' => 'test']
                 && $message->getGlobalMetadata() == ['meta1' => 'meta1']
@@ -67,6 +68,7 @@ class MandrillAdapterSpec extends ObjectBehavior
                 && $message->getCc()->has('me@dispostable.com')
                 && $message->getBcc()->has('me@dispostable.com')
                 && $message->getFrom()->has('me@dispostable.com')
+                && $message->getReplyTo()->has('me@dispostable.com')
                 && $message->getSubject() == $mail->getSubject()
                 && $message->getOptions() == ['subaccount' => 'test']
                 && $message->getImages() == []

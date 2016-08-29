@@ -36,6 +36,11 @@ class Mail
     protected $from = [];
 
     /**
+     * @var array
+     */
+    protected $replyTo = [];
+
+    /**
      * @var string
      */
     protected $subject;
@@ -125,11 +130,33 @@ class Mail
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getFrom()
     {
         return $this->from;
+    }
+
+    /**
+     * @param      $email
+     * @param null $name
+     */
+    public function setReplyTo($email, $name = null)
+    {
+        $this->replyTo = [];
+        if ($name) {
+            $this->replyTo[$email] = $name;
+            return;
+        }
+        $this->replyTo[] = $email;
+    }
+
+    /**
+     * @return array
+     */
+    public function getReplyTo()
+    {
+        return $this->replyTo;
     }
 
     /**
