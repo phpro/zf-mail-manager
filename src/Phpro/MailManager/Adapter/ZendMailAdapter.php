@@ -66,6 +66,7 @@ class ZendMailAdapter
         $message->setCc($mail->getCc());
         $message->setBcc($mail->getBcc());
         $message->setFrom($mail->getFrom());
+        $message->setReplyTo($mail->getReplyTo());
         $message->setSubject($mail->getSubject());
         $message->setBody($this->messageCreator->createMessage($mail));
 

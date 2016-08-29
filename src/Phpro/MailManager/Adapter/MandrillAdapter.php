@@ -65,6 +65,7 @@ class MandrillAdapter implements AdapterInterface
         $message->setTo($mail->getTo());
         $message->setCc($mail->getCc());
         $message->setBcc($mail->getBcc());
+        $message->setReplyTo($mail->getReplyTo());
 
         if ($mail->getFrom()) {
             $message->setFrom($mail->getFrom());

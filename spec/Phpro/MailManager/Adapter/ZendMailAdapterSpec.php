@@ -38,6 +38,7 @@ class ZendMailAdapterSpec extends ObjectBehavior
                 && $message->getCc()->has('me@dispostable.com')
                 && $message->getBcc()->has('me@dispostable.com')
                 && $message->getFrom()->has('me@dispostable.com')
+                && $message->getReplyTo()->has('me@dispostable.com')
                 && $message->getSubject() == $mail->getSubject();
         }))->shouldBeCalled();
 

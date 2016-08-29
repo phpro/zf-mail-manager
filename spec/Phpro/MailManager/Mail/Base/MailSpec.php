@@ -58,6 +58,17 @@ class MailSpec extends ObjectBehavior
         $result->shouldHaveCount(1);
     }
 
+    public function it_should_provide_a_reply_to_address()
+    {
+        $this->setReplyTo('me@email.com', 'name');
+        $this->getReplyTo()['me@email.com']->shouldBe('name');
+
+        $this->setReplyTo('me@email.com');
+        $result = $this->getReplyTo();
+        $result[0]->shouldBe('me@email.com');
+        $result->shouldHaveCount(1);
+    }
+
     public function it_should_provide_a_subject()
     {
         $value = 'subject';
@@ -76,12 +87,12 @@ class MailSpec extends ObjectBehavior
     }
 
     /**
-     * @param Zend\Mail\Header\HeaderInterface $header
+     * @param \Zend\Mail\Header\HeaderInterface $header
      */
     public function it_should_provide_headers($header)
     {
         $header->getFieldName()->willReturn('Reply-To');
-        $header->getFieldValue()->willReturn('me@dispostable.com');
+        $header->getFieldValue(false)->willReturn('me@dispostable.com');
 
         $this->addHeader($header);
         $this->addHeaders(['Content-Type' => 'text/html']);
